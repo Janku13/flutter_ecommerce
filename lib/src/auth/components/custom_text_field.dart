@@ -1,15 +1,28 @@
 import 'package:flutter/material.dart';
 
-class CustomTextField extends StatelessWidget {
+class CustomTextField extends StatefulWidget {
   final IconData inputIcon;
   final String inputLabel;
-  final bool isTextHidden;
+  final bool isPasswordInput;
+
   const CustomTextField({
     Key? key,
     required this.inputIcon,
     required this.inputLabel,
-    this.isTextHidden = false,
+    this.isPasswordInput = false,
   }) : super(key: key);
+
+  @override
+  State<CustomTextField> createState() => _CustomTextFieldState();
+}
+
+class _CustomTextFieldState extends State<CustomTextField> {
+  bool isTextHidden = false;
+  @override
+  void initState() {
+    super.initState();
+    isTextHidden = widget.isPasswordInput;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -18,8 +31,22 @@ class CustomTextField extends StatelessWidget {
       child: TextFormField(
         obscureText: isTextHidden,
         decoration: InputDecoration(
-          prefixIcon: Icon(inputIcon),
-          labelText: inputLabel,
+          suffixIcon: widget.isPasswordInput
+              ? IconButton(
+                  onPressed: () {
+                    setState(
+                      () {
+                        isTextHidden = !isTextHidden;
+                      },
+                    );
+                  },
+                  icon: Icon(
+                    isTextHidden ? Icons.visibility : Icons.visibility_off,
+                  ),
+                )
+              : null,
+          prefixIcon: Icon(widget.inputIcon),
+          labelText: widget.inputLabel,
           isDense: true,
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(20.0),
