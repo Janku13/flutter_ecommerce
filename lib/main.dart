@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce/src/auth/sign_in_screen.dart';
+import 'package:flutter_ecommerce/src/base/base_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -12,11 +13,12 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(
-        primarySwatch: Colors.green,
-      ),
+          primarySwatch: Colors.green,
+          scaffoldBackgroundColor: const Color.fromARGB(255, 231, 229, 229)),
       debugShowCheckedModeBanner: false,
       home: const SafeArea(
-        child: SignInScreen(),
+        // child: BaseScreen(),
+        child: BaseScreen(),
       ),
     );
   }
