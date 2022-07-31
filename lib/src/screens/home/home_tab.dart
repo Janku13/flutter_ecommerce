@@ -1,7 +1,10 @@
 import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
+// ignore: library_prefixes
+import 'package:flutter_ecommerce/src/config/app_data.dart' as appData;
 import 'package:flutter_ecommerce/src/config/custom_colors.dart';
-import 'package:flutter_ecommerce/src/home/components/category_tile.dart';
+import 'package:flutter_ecommerce/src/screens/home/components/category_tile.dart';
+import 'package:flutter_ecommerce/src/screens/home/components/item_tile.dart';
 
 class HomeWidget extends StatelessWidget {
   const HomeWidget({Key? key}) : super(key: key);
@@ -91,11 +94,27 @@ class HomeWidget extends StatelessWidget {
                     )),
               ),
             ),
-          )
+          ),
           //category list
-          ,
-          CategoryList(),
+          const CategoryList(),
           //product grid
+          Expanded(
+            child: GridView.builder(
+              padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
+              physics: const BouncingScrollPhysics(),
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  mainAxisSpacing: 10,
+                  crossAxisSpacing: 10,
+                  childAspectRatio: 9 / 11.5),
+              itemCount: appData.items.length,
+              itemBuilder: (_, index) {
+                return ItemTile(
+                  item: appData.items[index],
+                );
+              },
+            ),
+          )
         ],
       ),
     );
@@ -103,21 +122,13 @@ class HomeWidget extends StatelessWidget {
 }
 
 class CategoryList extends StatefulWidget {
-  CategoryList({Key? key}) : super(key: key);
+  const CategoryList({Key? key}) : super(key: key);
 
   @override
   State<CategoryList> createState() => _CategoryListState();
 }
 
 class _CategoryListState extends State<CategoryList> {
-  final List<String> categories = [
-    'Frutas',
-    'Grãos',
-    'Verduras',
-    'Temperos',
-    'Cereais',
-  ];
-
   String selectedCategory = 'Frutas';
 
   @override
@@ -129,11 +140,11 @@ class _CategoryListState extends State<CategoryList> {
         scrollDirection: Axis.horizontal,
         itemBuilder: (_, index) {
           return CategoryTile(
-            category: categories[index],
-            isSelected: selectedCategory == categories[index],
+            category: appData.categories[index],
+            isSelected: selectedCategory == appData.categories[index],
             onPressd: () {
               setState(() {
-                selectedCategory = categories[index];
+                selectedCategory = appData.categories[index];
               });
             },
           );
@@ -141,7 +152,7 @@ class _CategoryListState extends State<CategoryList> {
         separatorBuilder: (_, index) => const SizedBox(
           width: 10,
         ),
-        itemCount: categories.length,
+        itemCount: appData.categories.length,
       ),
     );
   }

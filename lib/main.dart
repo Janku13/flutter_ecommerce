@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_ecommerce/src/auth/sign_in_screen.dart';
-import 'package:flutter_ecommerce/src/base/base_screen.dart';
+import 'package:flutter_ecommerce/src/screens/base/base_screen.dart';
 
 void main() {
   runApp(const MyApp());

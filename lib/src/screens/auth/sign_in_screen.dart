@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
-import 'package:flutter_ecommerce/src/auth/components/custom_text_field.dart';
-import 'package:flutter_ecommerce/src/auth/sign_up_screen.dart';
-import 'package:flutter_ecommerce/src/base/base_screen.dart';
 
 import 'package:flutter_ecommerce/src/config/custom_colors.dart';
+import 'package:flutter_ecommerce/src/screens/auth/components/custom_text_field.dart';
+import 'package:flutter_ecommerce/src/screens/auth/sign_up_screen.dart';
+import 'package:flutter_ecommerce/src/screens/base/base_screen.dart';
 
 class SignInScreen extends StatelessWidget {
   const SignInScreen({Key? key}) : super(key: key);
