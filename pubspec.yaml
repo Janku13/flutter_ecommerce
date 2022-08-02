@@ -37,6 +37,8 @@ dependencies:
   mask_text_input_formatter: ^2.3.0
   badges: ^2.0.3
   intl: ^0.17.0
+  get: ^4.6.5
+  shimmer: ^2.0.0
 
 dev_dependencies:
   flutter_test:
