@@ -5,9 +5,27 @@ import 'package:flutter_ecommerce/src/config/app_data.dart' as appData;
 import 'package:flutter_ecommerce/src/config/custom_colors.dart';
 import 'package:flutter_ecommerce/src/screens/home/components/category_tile.dart';
 import 'package:flutter_ecommerce/src/screens/home/components/item_tile.dart';
+import 'package:flutter_ecommerce/src/widgets/app_title.dart';
+import 'package:flutter_ecommerce/src/widgets/custom_shimmer.dart';
 
-class HomeWidget extends StatelessWidget {
+class HomeWidget extends StatefulWidget {
   const HomeWidget({Key? key}) : super(key: key);
+
+  @override
+  State<HomeWidget> createState() => _HomeWidgetState();
+}
+
+class _HomeWidgetState extends State<HomeWidget> {
+  bool isLoading = true;
+  @override
+  void initState() {
+    super.initState();
+    Future.delayed(const Duration(seconds: 2), () {
+      setState(() {
+        isLoading = false;
+      });
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -17,27 +35,7 @@ class HomeWidget extends StatelessWidget {
         backgroundColor: Colors.transparent,
         elevation: 0,
         centerTitle: true,
-        title: Text.rich(
-          TextSpan(
-            style: const TextStyle(
-              fontSize: 30.0,
-            ),
-            children: [
-              TextSpan(
-                text: 'Groo',
-                style: TextStyle(
-                  color: CustomColors.customSwatchColor,
-                ),
-              ),
-              TextSpan(
-                text: 'cers',
-                style: TextStyle(
-                  color: CustomColors.customContrastColor,
-                ),
-              ),
-            ],
-          ),
-        ),
+        title: const AppTitle(),
         actions: [
           Padding(
             padding: const EdgeInsets.only(
@@ -99,22 +97,40 @@ class HomeWidget extends StatelessWidget {
           const CategoryList(),
           //product grid
           Expanded(
-            child: GridView.builder(
-              padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
-              physics: const BouncingScrollPhysics(),
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  mainAxisSpacing: 10,
-                  crossAxisSpacing: 10,
-                  childAspectRatio: 9 / 11.5),
-              itemCount: appData.items.length,
-              itemBuilder: (_, index) {
-                return ItemTile(
-                  item: appData.items[index],
-                );
-              },
-            ),
-          )
+            child: isLoading
+                ? GridView.count(
+                    padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
+                    physics: const BouncingScrollPhysics(),
+                    crossAxisCount: 2,
+                    mainAxisSpacing: 10,
+                    crossAxisSpacing: 10,
+                    childAspectRatio: 9 / 11.5,
+                    children: List.generate(
+                      10,
+                      (index) => CustomShimmer(
+                        height: double.infinity,
+                        width: double.infinity,
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                    ),
+                  )
+                : GridView.builder(
+                    padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
+                    physics: const BouncingScrollPhysics(),
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 2,
+                            mainAxisSpacing: 10,
+                            crossAxisSpacing: 10,
+                            childAspectRatio: 9 / 11.5),
+                    itemCount: appData.items.length,
+                    itemBuilder: (_, index) {
+                      return ItemTile(
+                        item: appData.items[index],
+                      );
+                    },
+                  ),
+          ),
         ],
       ),
     );

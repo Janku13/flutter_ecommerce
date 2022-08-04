@@ -25,7 +25,7 @@ class _BaseScreenState extends State<BaseScreen> {
         // },
         controller: pageController,
         children: [
-          const HomeWidget(),
+          HomeWidget(),
           Container(
             color: Colors.yellow,
           ),

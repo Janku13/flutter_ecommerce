@@ -5,6 +5,7 @@ import 'package:flutter_ecommerce/src/config/custom_colors.dart';
 import 'package:flutter_ecommerce/src/screens/auth/components/custom_text_field.dart';
 import 'package:flutter_ecommerce/src/screens/auth/sign_up_screen.dart';
 import 'package:flutter_ecommerce/src/screens/base/base_screen.dart';
+import 'package:flutter_ecommerce/src/widgets/app_title.dart';
 
 class SignInScreen extends StatelessWidget {
   const SignInScreen({Key? key}) : super(key: key);
@@ -24,27 +25,10 @@ class SignInScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     //app name
-                    const Text.rich(
-                      TextSpan(
-                        style: TextStyle(fontSize: 40.0),
-                        children: [
-                          TextSpan(
-                            text: 'Groo',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          TextSpan(
-                            text: 'cers',
-                            style: TextStyle(
-                              color: Color.fromARGB(255, 150, 12, 2),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    //categorias
+                    const AppTitle(
+                      greenTitleColor: Colors.white,
+                      titleSize: 40,
+                    ), //categorias
                     SizedBox(
                       height: 30.0,
                       child: DefaultTextStyle(
@@ -108,7 +92,7 @@ class SignInScreen extends StatelessWidget {
                           Navigator.of(context).pushReplacement(
                             MaterialPageRoute(
                               builder: (c) {
-                                return BaseScreen();
+                                return const BaseScreen();
                               },
                             ),
                           );

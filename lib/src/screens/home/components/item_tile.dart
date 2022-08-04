@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_ecommerce/src/config/app_data.dart' as appData;
 import 'package:flutter_ecommerce/src/config/custom_colors.dart';
 import 'package:flutter_ecommerce/src/models/item_model.dart';
 import 'package:flutter_ecommerce/src/services/utils_services.dart';
