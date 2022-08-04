@@ -4,15 +4,19 @@ import 'package:flutter/services.dart';
 class CustomTextField extends StatefulWidget {
   final IconData inputIcon;
   final String inputLabel;
+  final TextEditingController? controller;
   final List<TextInputFormatter>? inputFormatter;
   final bool isPasswordInput;
+  final String? Function(String?)? validator;
 
   const CustomTextField({
     Key? key,
     required this.inputIcon,
     required this.inputLabel,
+    this.controller,
     this.isPasswordInput = false,
     this.inputFormatter,
+    this.validator,
   }) : super(key: key);
 
   @override
@@ -32,6 +36,8 @@ class _CustomTextFieldState extends State<CustomTextField> {
     return Padding(
       padding: const EdgeInsets.only(bottom: 15.0),
       child: TextFormField(
+        controller: widget.controller,
+        validator: widget.validator,
         inputFormatters: widget.inputFormatter,
         obscureText: isTextHidden,
         decoration: InputDecoration(
