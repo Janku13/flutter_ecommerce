@@ -1,3 +1,4 @@
+import 'package:flutter_ecommerce/src/models/user_model.dart';
 import 'package:flutter_ecommerce/src/services/api/api_constants.dart';
 import 'package:flutter_ecommerce/src/services/api/http_manager.dart';
 
@@ -10,7 +11,8 @@ class AuthRepository {
       "password": password,
     });
     if (result["result"] != null) {
-      return result;
+      final user = UserModel.fromJson(result["result"]);
+      return {};
     } else {
       return {'error': 'a'};
     }

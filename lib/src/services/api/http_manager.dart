@@ -3,7 +3,7 @@ import 'package:flutter_ecommerce/src/services/api/api_constants.dart';
 
 class HttpManager {
   Future<Map> restRequest({
-    required Endpoints url,
+    required String url,
     required HttpMethods method,
     Map? headers,
     Map? body,

@@ -1,6 +1,8 @@
+import 'package:flutter_ecommerce/src/screens/auth/repository/auth_repository.dart';
 import 'package:get/get.dart';
 
 class AuthController extends GetxController {
+  final authRepository = AuthRepository();
   RxBool isLoading = false.obs;
   Future<void> signIn({
     required String email,
@@ -8,7 +10,7 @@ class AuthController extends GetxController {
   }) async {
     //TODO signIn
     isLoading.value = true;
-    await Future.delayed(const Duration(seconds: 2));
+    await authRepository.signIn(email: email, password: password);
     isLoading.value = false;
   }
 }
