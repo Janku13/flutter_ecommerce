@@ -1,13 +1,9 @@
 import 'package:dio/dio.dart';
-
-const String baseUrl = 'https://parseapi.back4app.com';
-
-// ignore: constant_identifier_names
-enum HttpMethods { PUT, GET, POST, PATCH, DELETE }
+import 'package:flutter_ecommerce/src/services/api/api_constants.dart';
 
 class HttpManager {
-  Future restRequest({
-    required String url,
+  Future<Map> restRequest({
+    required Endpoints url,
     required HttpMethods method,
     Map? headers,
     Map? body,
@@ -31,9 +27,10 @@ class HttpManager {
         data: body,
       );
       return response.data;
-    } on DioError {
-    } catch (e) {
-      print(e);
+    } on DioError catch (error) {
+      return error.response?.data ?? {};
+    } catch (error) {
+      return {error: error};
     }
   }
 }

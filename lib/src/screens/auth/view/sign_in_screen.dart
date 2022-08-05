@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter_ecommerce/src/app/routes.dart';
 import 'package:flutter_ecommerce/src/config/custom_colors.dart';
-import 'package:flutter_ecommerce/src/screens/auth/components/custom_text_field.dart';
+
 import 'package:flutter_ecommerce/src/screens/auth/controller/auth_controller.dart';
+import 'package:flutter_ecommerce/src/screens/auth/view/components/custom_text_field.dart';
 import 'package:flutter_ecommerce/src/widgets/app_title.dart';
 import 'package:get/get.dart';
 

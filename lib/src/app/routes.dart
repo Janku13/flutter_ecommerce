@@ -1,5 +1,5 @@
-import 'package:flutter_ecommerce/src/screens/auth/sign_in_screen.dart';
-import 'package:flutter_ecommerce/src/screens/auth/sign_up_screen.dart';
+import 'package:flutter_ecommerce/src/screens/auth/view/sign_in_screen.dart';
+import 'package:flutter_ecommerce/src/screens/auth/view/sign_up_screen.dart';
 import 'package:flutter_ecommerce/src/screens/base/base_screen.dart';
 import 'package:flutter_ecommerce/src/screens/splash/splash_screen.dart';
 import 'package:get/get.dart';
