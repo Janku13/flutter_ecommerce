@@ -10,6 +10,7 @@ class HttpManager {
     required String url,
     required HttpMethods method,
     Map? headers,
+    Map? body,
   }) async {
     Dio dio = Dio();
 
@@ -20,12 +21,19 @@ class HttpManager {
         'X-Parse-Application-Id': 'g1Oui3JqxnY4S1ykpQWHwEKGOe0dRYCPvPF4iykc',
         'X-Parse-REST-API-Key': 'rFBKU8tk0m5ZlKES2CGieOaoYz6TgKxVMv8jRIsN',
       });
-    dio.request(
-      '$baseUrl/$url',
-      options: Options(
-        headers: defaultHeaders,
-        method: method.name,
-      ),
-    );
+    try {
+      Response response = await dio.request(
+        '$baseUrl/$url',
+        options: Options(
+          headers: defaultHeaders,
+          method: method.name,
+        ),
+        data: body,
+      );
+      return response.data;
+    } on DioError {
+    } catch (e) {
+      print(e);
+    }
   }
 }
