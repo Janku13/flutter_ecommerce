@@ -1,21 +1,23 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:json_annotation/json_annotation.dart';
+
 part 'user_model.g.dart';
 
 @JsonSerializable()
 class UserModel {
   @JsonKey(name: 'fullname')
-  String name;
-  String id;
-  String email;
+  String? name;
+  String? id;
+  String? email;
   String? password;
   String? phone;
   String? cpf;
   String? token;
 
   UserModel({
-    required this.id,
-    required this.name,
-    required this.email,
+    this.id,
+    this.name,
+    this.email,
     this.password,
     this.phone,
     this.cpf,
@@ -29,6 +31,6 @@ class UserModel {
 
   @override
   String toString() {
-    return 'name: $name | cpf: $cpf';
+    return 'UserModel(name: $name, id: $id, email: $email, password: $password, phone: $phone, cpf: $cpf, token: $token)';
   }
 }

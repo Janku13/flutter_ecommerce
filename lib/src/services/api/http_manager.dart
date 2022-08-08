@@ -13,13 +13,13 @@ class HttpManager {
     final defaultHeaders = headers?.cast<String, String>() ?? {}
       ..addAll({
         'content-type': 'application/json',
-        'accept': 'application/json',
+        // 'accept': 'application/json',
         'X-Parse-Application-Id': 'g1Oui3JqxnY4S1ykpQWHwEKGOe0dRYCPvPF4iykc',
         'X-Parse-REST-API-Key': 'rFBKU8tk0m5ZlKES2CGieOaoYz6TgKxVMv8jRIsN',
       });
     try {
       Response response = await dio.request(
-        '$baseUrl/$url',
+        url,
         options: Options(
           headers: defaultHeaders,
           method: method.name,

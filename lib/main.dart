@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce/src/app/routes.dart';
 import 'package:flutter_ecommerce/src/screens/auth/controller/auth_controller.dart';
 import 'package:get/get.dart';
-import 'package:get/get_navigation/get_navigation.dart';
 
 void main() {
   Get.put(AuthController());
