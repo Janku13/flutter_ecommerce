@@ -1,30 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_ecommerce/src/app/routes.dart';
 import 'package:flutter_ecommerce/src/config/custom_colors.dart';
 import 'package:flutter_ecommerce/src/widgets/app_title.dart';
-import 'package:get/get.dart';
 
-class SplashScreen extends StatefulWidget {
+class SplashScreen extends StatelessWidget {
   const SplashScreen({Key? key}) : super(key: key);
-
-  @override
-  State<SplashScreen> createState() => _SplashScreenState();
-}
-
-class _SplashScreenState extends State<SplashScreen> {
-  @override
-  void initState() {
-    super.initState();
-    Future.delayed(const Duration(seconds: 2), () {
-      Get.offNamed(PagesNames.loginScreen);
-      // Navigator.popAndPushNamed(context, PagesNames.loginScreen);
-      // Navigator.of(context).pushReplacement(
-      //   MaterialPageRoute(builder: (ctx) {
-      //     return const SignInScreen();
-      //   }),
-      // );
-    });
-  }
 
   @override
   Widget build(BuildContext context) {

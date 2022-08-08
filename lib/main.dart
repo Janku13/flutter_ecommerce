@@ -4,6 +4,7 @@ import 'package:flutter_ecommerce/src/screens/auth/controller/auth_controller.da
 import 'package:get/get.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   Get.put(AuthController());
   runApp(const MyApp());
 }

@@ -7,6 +7,23 @@ import 'package:flutter_ecommerce/src/services/api/http_manager.dart';
 
 class AuthRepository {
   final HttpManager _httpManager = HttpManager();
+
+  Future<AuthResult> validateToken(String token) async {
+    final result = await _httpManager.restRequest(
+        url: Endpoints.validateToken,
+        method: HttpMethods.POST,
+        headers: {
+          'X-Parse-Session-Token': token,
+        });
+    if (result["result"] != null) {
+      final user = UserModel.fromJson(result["result"]);
+
+      return AuthResult.success(user);
+    } else {
+      return AuthResult.error(autherror.authErrorsString(result['error']));
+    }
+  }
+
   Future<AuthResult> signIn(
       {required String email, required String password}) async {
     final result = await _httpManager
@@ -14,7 +31,7 @@ class AuthRepository {
       "email": email,
       "password": password,
     });
-    print(result);
+
     if (result["result"] != null) {
       final user = UserModel.fromJson(result["result"]);
 

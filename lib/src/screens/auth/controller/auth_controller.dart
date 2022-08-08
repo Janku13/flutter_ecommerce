@@ -8,8 +8,45 @@ import 'package:get/get.dart';
 class AuthController extends GetxController {
   final authRepository = AuthRepository();
   final _utilsServices = UtilsServices();
+
   UserModel user = UserModel();
   RxBool isLoading = false.obs;
+  @override
+  void onInit() {
+    super.onInit();
+    validateToken();
+  }
+
+  void saveTokenAndGoBase() {
+    _utilsServices.saveLocalData(key: StorageKeys.token, data: user.token!);
+    Get.offAllNamed(PagesNames.baseScreen);
+  }
+
+  Future<void> validateToken() async {
+    //get token
+    String? token = await _utilsServices.getLocalData(key: StorageKeys.token);
+    if (token == null) {
+      Get.offAllNamed(PagesNames.loginScreen);
+      return;
+    }
+    AuthResult result = await authRepository.validateToken(token);
+    result.when(
+      success: (user) {
+        this.user = user;
+        saveTokenAndGoBase();
+      },
+      error: (mesg) {
+        signOut();
+      },
+    );
+  }
+
+  Future<void> signOut() async {
+    user = UserModel();
+    _utilsServices.removeLocalData(key: StorageKeys.token);
+    Get.offAllNamed(PagesNames.loginScreen);
+  }
+
   Future<void> signIn({
     required String email,
     required String password,
@@ -21,7 +58,7 @@ class AuthController extends GetxController {
     result.when(
       success: (user) {
         this.user = user;
-        Get.offAllNamed(PagesNames.baseScreen);
+        saveTokenAndGoBase();
       },
       error: (message) {
         _utilsServices.showToast(
