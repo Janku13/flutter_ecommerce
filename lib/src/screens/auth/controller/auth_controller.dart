@@ -11,11 +11,6 @@ class AuthController extends GetxController {
 
   UserModel user = UserModel();
   RxBool isLoading = false.obs;
-  @override
-  void onInit() {
-    super.onInit();
-    validateToken();
-  }
 
   void saveTokenAndGoBase() {
     _utilsServices.saveLocalData(key: StorageKeys.token, data: user.token!);
