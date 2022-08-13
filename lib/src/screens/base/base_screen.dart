@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce/src/config/custom_colors.dart';
-import 'package:flutter_ecommerce/src/screens/home/home_tab.dart';
+import 'package:flutter_ecommerce/src/screens/home/view/home_tab.dart';
 
 class BaseScreen extends StatefulWidget {
   const BaseScreen({Key? key}) : super(key: key);
@@ -25,7 +25,7 @@ class _BaseScreenState extends State<BaseScreen> {
         // },
         controller: pageController,
         children: [
-          HomeWidget(),
+          const HomeWidget(),
           Container(
             color: Colors.yellow,
           ),
