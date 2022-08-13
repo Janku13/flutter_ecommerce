@@ -52,7 +52,7 @@ class HomeController extends GetxController {
   Future<void> getAllProducts({bool canLoad = true}) async {
     Map<String, dynamic> body = {
       'page': currentCategory!.pagination,
-      // 'categoryId': currentCategory!.id,
+      'categoryId': currentCategory!.id,
       'itemsPerPage': itemsPerPage,
     };
     if (canLoad) {
