@@ -1,7 +1,6 @@
 import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 // ignore: library_prefixes
-import 'package:flutter_ecommerce/src/config/app_data.dart' as appData;
 import 'package:flutter_ecommerce/src/config/custom_colors.dart';
 import 'package:flutter_ecommerce/src/screens/home/controller/home_controller.dart';
 import 'package:flutter_ecommerce/src/screens/home/view/components/category_tile.dart';
@@ -94,7 +93,7 @@ class _HomeWidgetState extends State<HomeWidget> {
           const CategoryList(),
           //product grid
           Expanded(child: GetBuilder<HomeController>(builder: (ctrl) {
-            return ctrl.isLoading
+            return ctrl.isProductLoading
                 ? GridView.count(
                     padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
                     physics: const BouncingScrollPhysics(),
@@ -120,10 +119,10 @@ class _HomeWidgetState extends State<HomeWidget> {
                             mainAxisSpacing: 10,
                             crossAxisSpacing: 10,
                             childAspectRatio: 9 / 11.5),
-                    itemCount: appData.items.length,
+                    itemCount: ctrl.allProducts.length,
                     itemBuilder: (_, index) {
                       return ItemTile(
-                        item: appData.items[index],
+                        item: ctrl.allProducts[index],
                       );
                     },
                   );
@@ -145,11 +144,10 @@ class _CategoryListState extends State<CategoryList> {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<HomeController>(builder: (ctrl) {
-      print(ctrl.currentCategory);
       return Container(
         padding: const EdgeInsets.only(left: 25),
         height: 40.0,
-        child: !ctrl.isLoading
+        child: !ctrl.isCategoryLoading
             ? ListView.separated(
                 scrollDirection: Axis.horizontal,
                 itemBuilder: (_, index) {
