@@ -121,6 +121,10 @@ class _HomeWidgetState extends State<HomeWidget> {
                             childAspectRatio: 9 / 11.5),
                     itemCount: ctrl.allProducts.length,
                     itemBuilder: (_, index) {
+                      if ((index + 1 == ctrl.allProducts.length) &&
+                          !ctrl.isLastPage) {
+                        ctrl.loadMoreProducts();
+                      }
                       return ItemTile(
                         item: ctrl.allProducts[index],
                       );
