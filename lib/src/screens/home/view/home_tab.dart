@@ -1,12 +1,14 @@
 import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 // ignore: library_prefixes
-import 'package:flutter_ecommerce/src/config/app_data.dart' as appData;
 import 'package:flutter_ecommerce/src/config/custom_colors.dart';
-import 'package:flutter_ecommerce/src/screens/home/components/category_tile.dart';
-import 'package:flutter_ecommerce/src/screens/home/components/item_tile.dart';
+import 'package:flutter_ecommerce/src/screens/home/controller/home_controller.dart';
+import 'package:flutter_ecommerce/src/screens/home/view/components/category_tile.dart';
+
+import 'package:flutter_ecommerce/src/screens/home/view/components/item_tile.dart';
 import 'package:flutter_ecommerce/src/widgets/app_title.dart';
 import 'package:flutter_ecommerce/src/widgets/custom_shimmer.dart';
+import 'package:get/get.dart';
 
 class HomeWidget extends StatefulWidget {
   const HomeWidget({Key? key}) : super(key: key);
@@ -16,15 +18,9 @@ class HomeWidget extends StatefulWidget {
 }
 
 class _HomeWidgetState extends State<HomeWidget> {
-  bool isLoading = true;
   @override
   void initState() {
     super.initState();
-    Future.delayed(const Duration(seconds: 2), () {
-      setState(() {
-        isLoading = false;
-      });
-    });
   }
 
   @override
@@ -96,8 +92,8 @@ class _HomeWidgetState extends State<HomeWidget> {
           //category list
           const CategoryList(),
           //product grid
-          Expanded(
-            child: isLoading
+          Expanded(child: GetBuilder<HomeController>(builder: (ctrl) {
+            return ctrl.isProductLoading
                 ? GridView.count(
                     padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
                     physics: const BouncingScrollPhysics(),
@@ -123,14 +119,18 @@ class _HomeWidgetState extends State<HomeWidget> {
                             mainAxisSpacing: 10,
                             crossAxisSpacing: 10,
                             childAspectRatio: 9 / 11.5),
-                    itemCount: appData.items.length,
+                    itemCount: ctrl.allProducts.length,
                     itemBuilder: (_, index) {
+                      if ((index + 1 == ctrl.allProducts.length) &&
+                          !ctrl.isLastPage) {
+                        ctrl.loadMoreProducts();
+                      }
                       return ItemTile(
-                        item: appData.items[index],
+                        item: ctrl.allProducts[index],
                       );
                     },
-                  ),
-          ),
+                  );
+          })),
         ],
       ),
     );
@@ -145,31 +145,32 @@ class CategoryList extends StatefulWidget {
 }
 
 class _CategoryListState extends State<CategoryList> {
-  String selectedCategory = 'Frutas';
-
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.only(left: 25),
-      height: 40.0,
-      child: ListView.separated(
-        scrollDirection: Axis.horizontal,
-        itemBuilder: (_, index) {
-          return CategoryTile(
-            category: appData.categories[index],
-            isSelected: selectedCategory == appData.categories[index],
-            onPressd: () {
-              setState(() {
-                selectedCategory = appData.categories[index];
-              });
-            },
-          );
-        },
-        separatorBuilder: (_, index) => const SizedBox(
-          width: 10,
-        ),
-        itemCount: appData.categories.length,
-      ),
-    );
+    return GetBuilder<HomeController>(builder: (ctrl) {
+      return Container(
+        padding: const EdgeInsets.only(left: 25),
+        height: 40.0,
+        child: !ctrl.isCategoryLoading
+            ? ListView.separated(
+                scrollDirection: Axis.horizontal,
+                itemBuilder: (_, index) {
+                  return CategoryTile(
+                    category: ctrl.allCategories[index].title,
+                    isSelected:
+                        ctrl.allCategories[index] == ctrl.currentCategory,
+                    onPressd: () {
+                      ctrl.selectCategory(ctrl.allCategories[index]);
+                    },
+                  );
+                },
+                separatorBuilder: (_, index) => const SizedBox(
+                  width: 10,
+                ),
+                itemCount: ctrl.allCategories.length,
+              )
+            : const Text('Loading'),
+      );
+    });
   }
 }
