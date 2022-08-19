@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_ecommerce/src/config/custom_colors.dart';
-import 'package:flutter_ecommerce/src/screens/auth/view/components/custom_text_field.dart';
+import 'package:flutter_ecommerce/src/screens/common_widgets/custom_text_field.dart';
 
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 

@@ -4,7 +4,7 @@ import 'package:flutter_ecommerce/src/app/routes.dart';
 import 'package:flutter_ecommerce/src/config/custom_colors.dart';
 
 import 'package:flutter_ecommerce/src/screens/auth/controller/auth_controller.dart';
-import 'package:flutter_ecommerce/src/screens/auth/view/components/custom_text_field.dart';
+import 'package:flutter_ecommerce/src/screens/common_widgets/custom_text_field.dart';
 import 'package:flutter_ecommerce/src/widgets/app_title.dart';
 import 'package:get/get.dart';
 
@@ -136,7 +136,7 @@ class SignInScreen extends StatelessWidget {
                                         // );
                                       },
                                 child: authController.isLoading.value
-                                    ? Text('wait')
+                                    ? const Text('wait')
                                     : const Text(
                                         'Entrar',
                                         style: TextStyle(
