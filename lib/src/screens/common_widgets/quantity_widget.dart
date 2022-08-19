@@ -5,11 +5,13 @@ class QuantityWidget extends StatelessWidget {
   final int value;
   final String suffixText;
   final Function(int quantity) result;
+  final bool isRemovable;
   const QuantityWidget({
     Key? key,
     required this.value,
     required this.suffixText,
     required this.result,
+    this.isRemovable = false,
   }) : super(key: key);
 
   @override
@@ -27,43 +29,55 @@ class QuantityWidget extends StatelessWidget {
           ),
         ],
       ),
-      child: Row(children: [
-        _QuantityButton(
-          onPressed: () {
-            if (value == 1) return;
-            int resulCount = value - 1;
-            result(resulCount);
-          },
-          color: Colors.grey,
-          icon: const Icon(
-            Icons.remove,
-            color: Colors.white,
-            size: 16,
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          _QuantityButton(
+            onPressed: () {
+              if (value == 1 && !isRemovable) {
+                return;
+              }
+
+              int resulCount = value - 1;
+              result(resulCount);
+            },
+            color: !isRemovable || value > 1 ? Colors.grey : Colors.red,
+            icon: !isRemovable || value > 1
+                ? const Icon(
+                    Icons.remove,
+                    color: Colors.white,
+                    size: 16,
+                  )
+                : const Icon(
+                    Icons.delete_forever,
+                    color: Colors.white,
+                    size: 16,
+                  ),
           ),
-        ),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 6),
-          child: Text(
-            '$value$suffixText',
-            style: const TextStyle(
-              fontSize: 15,
-              fontWeight: FontWeight.bold,
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 6),
+            child: Text(
+              '$value$suffixText',
+              style: const TextStyle(
+                fontSize: 15,
+                fontWeight: FontWeight.bold,
+              ),
             ),
           ),
-        ),
-        _QuantityButton(
-          onPressed: () {
-            int resulCount = value + 1;
-            result(resulCount);
-          },
-          color: CustomColors.customSwatchColor,
-          icon: const Icon(
-            Icons.add,
-            color: Colors.white,
-            size: 16,
+          _QuantityButton(
+            onPressed: () {
+              int resulCount = value + 1;
+              result(resulCount);
+            },
+            color: CustomColors.customSwatchColor,
+            icon: const Icon(
+              Icons.add,
+              color: Colors.white,
+              size: 16,
+            ),
           ),
-        ),
-      ]),
+        ],
+      ),
     );
   }
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce/src/config/custom_colors.dart';
+import 'package:flutter_ecommerce/src/screens/cart/cart_tab.dart';
 import 'package:flutter_ecommerce/src/screens/home/view/home_tab.dart';
 
 class BaseScreen extends StatefulWidget {
@@ -26,9 +27,7 @@ class _BaseScreenState extends State<BaseScreen> {
         controller: pageController,
         children: [
           const HomeWidget(),
-          Container(
-            color: Colors.yellow,
-          ),
+          CartTabe(),
           Container(
             color: Colors.green,
           ),
