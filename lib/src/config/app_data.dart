@@ -1,6 +1,6 @@
 import 'package:flutter_ecommerce/src/models/cart_item_model.dart';
 import 'package:flutter_ecommerce/src/models/item_model.dart';
-import 'package:flutter_ecommerce/src/models/user_model.dart';
+import 'package:flutter_ecommerce/src/models/order_model.dart';
 
 ItemModel apple = ItemModel(
   description:
@@ -78,10 +78,17 @@ List<CartItemModel> cartItems = [
   CartItemModel(item: mango, quantity: 1),
   CartItemModel(item: guava, quantity: 3),
 ];
-UserModel user = UserModel(
-  phone: '99 9 9999-9999',
-  cpf: '701.605.981-25',
-  email: 'mohamed@gmail.com',
-  name: 'Mohamed',
-  password: '',
-);
+
+List<OrderModel> orders = [
+  OrderModel(
+    id: 'id',
+    status: 'status',
+    copyAndPaste: 'copyAndPaste',
+    total: 10,
+    createdDateTime: DateTime.parse('2021-06-08 10:00'),
+    overdueDateTime: DateTime.parse('2021-06-08 11:00'),
+    items: [
+      CartItemModel(item: apple, quantity: 2),
+    ],
+  )
+];

@@ -1,6 +1,8 @@
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/date_symbol_data_local.dart';
+
 import 'package:intl/intl.dart';
 
 abstract class StorageKeys {
@@ -25,6 +27,12 @@ class UtilsServices {
   String priceToCurrency(double price) {
     NumberFormat numberFormat = NumberFormat.simpleCurrency(locale: 'pt_BR');
     return numberFormat.format(price);
+  }
+
+  String formatDateTime(DateTime dateTime) {
+    initializeDateFormatting();
+    DateFormat dateFormat = DateFormat.yMd('pt_Br').add_Hm();
+    return dateFormat.format(dateTime);
   }
 
   void showToast({
