@@ -1,6 +1,7 @@
 import 'package:flutter_ecommerce/src/models/cart_item_model.dart';
 import 'package:flutter_ecommerce/src/models/item_model.dart';
 import 'package:flutter_ecommerce/src/models/order_model.dart';
+import 'package:flutter_ecommerce/src/models/user_model.dart';
 
 ItemModel apple = ItemModel(
   description:
@@ -79,10 +80,40 @@ List<CartItemModel> cartItems = [
   CartItemModel(item: guava, quantity: 3),
 ];
 
+UserModel user = UserModel(
+  phone: '99 9 9999-9999',
+  cpf: '999.999.999-99',
+  email: 'user@email.com',
+  name: 'New User',
+  password: '',
+);
+
 List<OrderModel> orders = [
   OrderModel(
     id: 'id',
-    status: 'status',
+    status: 'prepering_purchase',
+    copyAndPaste: 'copyAndPaste',
+    total: 10,
+    createdDateTime: DateTime.parse('2024-06-08 10:00'),
+    overdueDateTime: DateTime.parse('2024-06-08 11:00'),
+    items: [
+      CartItemModel(item: apple, quantity: 2),
+    ],
+  ),
+  OrderModel(
+    id: 'id',
+    status: 'pending_payment',
+    copyAndPaste: 'copyAndPaste',
+    total: 10,
+    createdDateTime: DateTime.parse('2024-06-08 10:00'),
+    overdueDateTime: DateTime.parse('2024-06-08 11:00'),
+    items: [
+      CartItemModel(item: apple, quantity: 2),
+    ],
+  ),
+  OrderModel(
+    id: 'id',
+    status: 'pending_payment',
     copyAndPaste: 'copyAndPaste',
     total: 10,
     createdDateTime: DateTime.parse('2021-06-08 10:00'),
@@ -90,5 +121,16 @@ List<OrderModel> orders = [
     items: [
       CartItemModel(item: apple, quantity: 2),
     ],
-  )
+  ),
+  OrderModel(
+    id: 'id',
+    status: 'delivered',
+    copyAndPaste: 'copyAndPaste',
+    total: 10,
+    createdDateTime: DateTime.parse('2023-06-08 10:00'),
+    overdueDateTime: DateTime.parse('2023-06-08 11:00'),
+    items: [
+      CartItemModel(item: apple, quantity: 2),
+    ],
+  ),
 ];

@@ -3,6 +3,7 @@ import 'package:flutter_ecommerce/src/config/custom_colors.dart';
 import 'package:flutter_ecommerce/src/screens/cart/cart_tab.dart';
 import 'package:flutter_ecommerce/src/screens/home/view/home_tab.dart';
 import 'package:flutter_ecommerce/src/screens/orders/orders_tab.dart';
+import 'package:flutter_ecommerce/src/screens/profile/profile_tab.dart';
 
 class BaseScreen extends StatefulWidget {
   const BaseScreen({Key? key}) : super(key: key);
@@ -26,13 +27,11 @@ class _BaseScreenState extends State<BaseScreen> {
         //   });
         // },
         controller: pageController,
-        children: [
-          const HomeWidget(),
-          const CartTabe(),
-          const OrdersTab(),
-          Container(
-            color: Colors.blue,
-          ),
+        children: const [
+          HomeWidget(),
+          CartTabe(),
+          OrdersTab(),
+          ProfileTab(),
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(
